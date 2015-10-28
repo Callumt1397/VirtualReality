@@ -1,5 +1,16 @@
 package com.virtualreality;
 
-public class VirtualReality {
+import org.bukkit.plugin.java.JavaPlugin;
 
+public class VirtualReality extends JavaPlugin{
+
+	@Override
+	public void onEnable(){
+		
+		//Commands
+		
+		//Events
+		
+	}
+	
 }
