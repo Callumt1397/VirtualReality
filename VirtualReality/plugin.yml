@@ -1,8 +1,0 @@
-name: VirtualReality
-main: com.virtualreality.VirtualReality
-authors: [Dillan]
-version: 1.0
-description: VirtualReality
-#commands:
-#  reload:
-#    description: Uh..
