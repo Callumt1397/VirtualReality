@@ -1,8 +1,17 @@
 package com.virtualreality;
 
-public class VirtualReality {
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class VirtualReality extends JavaPlugin{
+	
+	private static VirtualReality vr;
 	
 	public void onEnable(){
+		vr = this;
 		
+	}
+	
+	public static VirtualReality getInstance(){
+		return vr;
 	}
 }
