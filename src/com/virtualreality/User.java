@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.bukkit.entity.Player;
 
-import com.virtualreality.enums.Skill;
-import com.virtualreality.enums.Trait;
+import com.virtualreality.skills.Skill;
+import com.virtualreality.traits.Trait;
 
 public class User {
 
@@ -16,48 +16,46 @@ public class User {
 		this.player = player;
 		config = new Config(new File("userdata"), player.getUniqueId().toString(), VirtualReality.getInstance());
 
-		setDefaults();
+		config.save();
 	}
 
 	public Player getPlayer() {
 		return this.player;
 	}
 
-	public int getSkillLevel(Skill skill) {
-		if (!config.getConfig().contains("Skills." + skill))
+	
+	//Using a double since the integer part can be used to define a players level
+	//and the decimal part can be used to show how far through the rank they are
+	//e.g. 5.09 means level 5 and 0.9% through the rank
+	public double getSkillLevel(Skill skill) {
+		if (!config.getConfig().contains("Skills." + skill.toString().toLowerCase()))
 			return 0;
-		return config.getConfig().getInt("Skills." + skill);
+		return config.getConfig().getDouble("Skills." + skill.toString().toLowerCase());
 	}
 
-	public void setSkillLevel(Skill skill, int level) {
+	public void setSkillLevel(Skill skill, double level) {
 		if (level < skill.getMaxLevel()) {
-			config.set("Skills." + skill, level);
+			config.set("Skills." + skill.toString().toLowerCase(), level);
 			config.save();
+			
+			this.player.sendMessage("Skill Level: " + getSkillLevel(skill));
 		}
 	}
 
 	public boolean hasTrait(Trait trait) {
-		if (config.getConfig().contains("Trait." + trait))
+		if (config.getConfig().contains("Trait." + trait.toString().toLowerCase()))
 			return true;
 		return false;
 	}
-	
-	public void giveTrait(Trait trait){
-		if(!hasTrait(trait))
-			config.getConfig().createSection("Trait." + trait);
+
+	public void addTrait(Trait trait) {
+		if (!hasTrait(trait))
+			config.getConfig().createSection("Trait." + trait.toString().toLowerCase());
 	}
 
-	// Setting all defaults to the players file
-
-	public void setDefaults() {
-		if (!config.getConfig().contains("DeleteThisToResetConfig")) {
-			config.set("Info.Kills", 0);
-			config.set("Info.Deaths", 0);
-
-			for (Skill skill : Skill.values()) {
-				config.set("Skills." + skill, 0);
-			}
-
+	public void removeTrait(Trait trait) {
+		if (hasTrait(trait)) {
+			config.getConfig().set("Trait." + trait.toString().toLowerCase(), null);
 			config.save();
 		}
 	}
