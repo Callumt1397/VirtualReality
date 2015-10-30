@@ -10,11 +10,20 @@ import com.virtualreality.skills.listeners.SwordSkillListener;
 
 public class VirtualReality extends JavaPlugin{
 	
+	private static VirtualReality vr;
+	
 	public void onEnable(){
-		Bukkit.getPluginManager().registerEvents(new SwordSkillListener(), this);
+		vr = this;
+		
+		PluginManager pm = this.getServer().getPluginManager();
+		pm.registerEvents(new SwordSkillListener(), this);
 		
 		setupSkillFolder();
 		
+	}
+	
+	public static VirtualReality getInstance(){
+		return vr;
 	}
 	
 	public void setupSkillFolder(){
