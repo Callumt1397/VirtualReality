@@ -33,9 +33,7 @@ public class SwordSkillListener implements Listener {
 	}
 
 	public double getEntityKillValue(EntityType type) {
-		if (!config.getConfig().contains(type.toString().toLowerCase()))
-			return 0;
-		return config.getConfig().getDouble(type.toString().toLowerCase());
+		return config.getConfig().getDouble(type.toString().toLowerCase(),0);
 	}
 
 }
