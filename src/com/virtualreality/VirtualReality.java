@@ -2,7 +2,7 @@ package com.virtualreality;
 
 import java.io.File;
 
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.virtualreality.skills.Skill;
@@ -15,8 +15,7 @@ public class VirtualReality extends JavaPlugin{
 	public void onEnable(){
 		vr = this;
 		
-		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvents(new SwordSkillListener(), this);
+		Bukkit.getPluginManager().registerEvents(new SwordSkillListener(), this);
 		
 		setupSkillFolder();
 		

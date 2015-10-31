@@ -24,16 +24,26 @@ public class User {
 	}
 
 	
-	//Using a double since the integer part can be used to define a players level
-	//and the decimal part can be used to show how far through the rank they are
-	//e.g. 5.09 means level 5 and 0.9% through the rank
-	public double getSkillLevel(Skill skill) {
-		if (!config.getConfig().contains("Skills." + skill.toString().toLowerCase()))
-			return 0;
-		return config.getConfig().getDouble("Skills." + skill.toString().toLowerCase());
+	/*
+	* the first arg is level
+	* the second arg is how for in to it.
+	*/
+	
+	public String[] getSkillLevel(Skill skill) {
+		return Double.toString(config.getConfig().getDouble("Skills." + skill.toString().toLowerCase(), 0.0)).split(".");
 	}
-
-	public void setSkillLevel(Skill skill, double level) {
+	
+	public void setSkillLevel(Skill skill, String[] args) {
+		double level = Double.parseDouble(args[0] + args[1]);
+		if (level < skill.getMaxLevel()) {
+			config.set("Skills." + skill.toString().toLowerCase(), level);
+			config.save();
+			
+			this.player.sendMessage("Skill Level: " + getSkillLevel(skill));
+		}
+	}
+	
+	public void setSkillLevelDouble(Skill skill, double level) {
 		if (level < skill.getMaxLevel()) {
 			config.set("Skills." + skill.toString().toLowerCase(), level);
 			config.save();
