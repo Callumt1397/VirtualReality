@@ -50,17 +50,19 @@ public class Config {
 			try {
 				if (this.FOLDER.mkdir()) {
 				}
-			} catch (Exception var1_1) {
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 		}
 		this.configFile = new File(this.FOLDER, this.FILENAME);
 		if (!this.configFile.exists()) {
 			try {
 				this.configFile.createNewFile();
-			} catch (IOException var1_2) {
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
 		}
-		this.config = YamlConfiguration.loadConfiguration((File) this.configFile);
+		this.config = YamlConfiguration.loadConfiguration(this.configFile);
 	}
 
 	public void saveDefaultConfig() {
@@ -78,7 +80,8 @@ public class Config {
 		}
 		try {
 			this.getConfig().save(this.configFile);
-		} catch (IOException var1_1) {
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 	}
 

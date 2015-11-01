@@ -3,7 +3,7 @@ package com.virtualreality.skills;
 public enum Skill {
 
 	//General Skills
-	SWORDS(100), AXES(100), ARCHERY(100), CRAFTING(100), BREWING(100),  
+	SWORDS(10), AXES(100), ARCHERY(100), CRAFTING(100), BREWING(100),  
 	
 	//Special Skills
 	LUCK(10), INTELLIGENCE(10), STRENGTH(10);
