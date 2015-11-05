@@ -14,7 +14,7 @@ public class SkillsUtil {
 	}
 	
 	public static double getEntityKillValue(EntityType type, Skill s) {
-		return new Config(new File("skills"), s.name().toLowerCase(), VirtualReality.getInstance()).getConfig().getDouble(type.toString().toLowerCase(),0);
+		return new Config(new File("skills"), s.name().toLowerCase(), VirtualReality.getInstance()).getConfig().getDouble(type.toString().toLowerCase(), 0);
 	}
 	
 }
