@@ -1,0 +1,15 @@
+Skills:
+1) Skills will have "addons", each skill has an "addon" path 
+		e.g Enchanting has 3 paths
+			http://www.uesp.net/wiki/Skyrim:Enchanting
+			
+			SkillUpgrade Class - 
+				level needed - the level that their skill needs to be to buy this upgrade
+				upgrade needed - upgrades needed in order to buy this
+
+2) Skill progression will have a max level of 100, it will be handled as it was such that the
+   integer part will be the players level and the decimal will show their progress.
+   
+   
+
+Questions:

@@ -5,7 +5,7 @@ import java.io.File;
 import org.bukkit.entity.Player;
 
 import com.virtualreality.skills.Skill;
-import com.virtualreality.traits.Trait;
+import com.virtualreality.skills.SkillUpgrade;
 
 public class User {
 
@@ -26,7 +26,7 @@ public class User {
 	
 	/*
 	* the first arg is level
-	* the second arg is how for in to it.
+	* the second arg is how far in to it.
 	*/
 	
 	public String[] getSkillLevel(Skill skill) {
@@ -35,39 +35,26 @@ public class User {
 	
 	public void setSkillLevel(Skill skill, String[] args) {
 		double level = Double.parseDouble(args[0] + args[1]);
-		if (level < skill.getMaxLevel()) {
-			config.set("Skills." + skill.toString().toLowerCase(), level);
+		if (level <= 100) {
+			config.set("skills.progression" + skill.toString().toLowerCase(), level);
 			config.save();
-			
-			this.player.sendMessage("Skill Level: " + getSkillLevel(skill));
 		}
 	}
 	
-	public void setSkillLevelDouble(Skill skill, double level) {
-		if (level < skill.getMaxLevel()) {
-			config.set("Skills." + skill.toString().toLowerCase(), level);
-			config.save();
-			
-			this.player.sendMessage("Skill Level: " + getSkillLevel(skill));
-		}
-	}
-
-	public boolean hasTrait(Trait trait) {
-		if (config.getConfig().contains("Trait." + trait.toString().toLowerCase()))
-			return true;
-		return false;
-	}
-
-	public void addTrait(Trait trait) {
-		if (!hasTrait(trait))
-			config.getConfig().createSection("Trait." + trait.toString().toLowerCase());
-	}
-
-	public void removeTrait(Trait trait) {
-		if (hasTrait(trait)) {
-			config.getConfig().set("Trait." + trait.toString().toLowerCase(), null);
+	public void setSkillLevel(Skill skill, double level) {
+		if (level <= 100) {
+			config.set("skills.progression." + skill.toString().toLowerCase(), level);
 			config.save();
 		}
+	}
+	
+	public SkillUpgrade[] getSkillUpgrades(Skill skill){
+		//return upgrades a player owns for a certain skill
+		return null;
+	}
+	
+	public void setSkillUpgrades(Skill skill){
+		//set all upgrades for a skill as a single string, each upgrade seperated by a ","
 	}
 
 }
